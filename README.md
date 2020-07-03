@@ -182,5 +182,5 @@ Made with :heavy_heart_exclamation: by Marcio Lourenço :wave: [Get in touch!](h
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
 [vs-url]: https://code.visualstudio.com/download
-[front-url]: https://github.com/XDevelopers/boti-cashback/tree/master/front#-how-to-use
-[back-url]: https://github.com/XDevelopers/boti-cashback/tree/master/back#-how-to-use
+[front-url]: https://github.com/XDevelopers/boti-cashback/tree/master/front#information_source-how-to-use
+[back-url]: https://github.com/XDevelopers/boti-cashback/tree/master/back#information_source-how-to-use
