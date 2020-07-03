@@ -31,6 +31,14 @@ namespace Boticario.EuRevendedor.Core.Security
         /// <param name="configuration">The configuration.</param>
         public JwtConfigurations(IConfiguration configuration)
         {
+            if(configuration == null) {
+                throw new ArgumentNullException("\n\n\n As Configurações não foram encontradas. \n\n\n");
+            }
+
+            if(configuration["JwtSettings:Issuer"] == null) {
+                throw new ArgumentNullException("\n\n\n As Configurações para o JWT não foram encontradas.\n\n\n");
+            }
+
             Issuer = configuration["JwtSettings:Issuer"];
             Audience = configuration["JwtSettings:Audience"];
             ValidForMinutes = Convert.ToInt32(configuration["JwtSettings:ValidForMinutes"]);

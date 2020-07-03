@@ -116,12 +116,12 @@ $ dotnet restore
 $ dotnet build
 
 # Go to API project
-cd src\Boticario.EuRevendedor
+cd src/Boticario.EuRevendedor
 
 # Start frontend app
 $ dotnet run
 
-# running https on port 5001
+# running HTTP on port 5000
  ```
 
  #### Frontend
