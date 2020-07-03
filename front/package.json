@@ -1,0 +1,44 @@
+{
+    "name": "boti-cashback.admintool",
+    "version": "1.0.0",
+    "description": "Painel Administrativo - Boticário Cashback",
+    "private": true,
+    "scripts": {
+        "dev": "cross-env NUXT_ENV_SCOPE=development nuxt --port 5050",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "generate:dev": "cross-env NUXT_ENV_SCOPE=development nuxt generate",
+        "generate:stg": "cross-env NUXT_ENV_SCOPE=staging nuxt generate",
+        "generate:prd": "cross-env NUXT_ENV_SCOPE=production nuxt generate",
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+        "precommit": "npm run lint"
+    },
+    "dependencies": {
+        "cross-env": "^7.0.2",
+        "@nuxtjs/auth": "^4.8.5",
+        "@nuxtjs/axios": "^5.3.6",
+        "@nuxtjs/dotenv": "^1.4.1",
+        "@nuxtjs/moment": "^1.2.0",
+        "@nuxtjs/pwa": "^3.0.0-0",
+        "@nuxtjs/toast": "^3.2.1",
+        "nuxt": "^2.10.1",
+        "nuxt-sweetalert2": "^1.0.0",
+        "vee-validate": "^3.1.1",
+        "velocity-animate": "^1.5.2",
+        "vue-the-mask": "^0.11.1",
+        "vuetify": "^2.1.14",
+        "xlsx": "^0.15.6"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.7.7",
+        "@mdi/font": "^4.5.95",
+        "@nuxtjs/eslint-config": "^2.0.0",
+        "@nuxtjs/eslint-module": "^1.1.0",
+        "@nuxtjs/vuetify": "^1.9.1",
+        "babel-eslint": "^10.0.3",
+        "cross-env": "^7.0.2",
+        "eslint": "^6.8.0",
+        "eslint-plugin-nuxt": ">=0.4.2",
+        "source-map-resolve": "^0.6.0"
+    }
+}

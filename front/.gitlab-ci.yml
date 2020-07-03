@@ -1,0 +1,66 @@
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - setup
+  - deploy
+
+setup:
+  stage: setup  
+  script:  
+    - echo "Preparing CI environment dependencies"
+    - apt-get update
+    - apt-get install zip -y    
+
+deploy_staging:
+  stage: deploy
+  image: node:slim
+  only:
+    - develop
+  script:
+    - echo "Starting application deployment on STAGING environment"
+    - echo "Downloading application package dependencies..."
+    - yarn install
+    - echo "Building release version..."
+    - yarn build
+    - echo "Packing application for distribution..."
+    - echo "Set up the Environments"
+    - yarn generate:stg
+    - echo "Giving full permission to release folder..."
+    - chmod 777 dist
+    - echo "Copying ZEIT files to release folder..."
+    - cp now.json dist
+    - cd dist
+    - echo "Installing ZEIT dependencies..."
+    - yarn global add now@16.7.3
+    - echo "Starting ZEIT deployment..."
+    - now -e NODE_ENV=staging --token=$ZEIT_TOKEN
+    - now alias $ZEIT_PROJECT $ZEIT_STAGE_ALIAS --token=$ZEIT_TOKEN
+    - echo "Deployment done"
+
+deploy_production:
+  stage: deploy
+  image: node:slim
+  only:
+    - master
+  script:
+    - echo "Starting application deployment on PRODUCTION environment"
+    - echo "Downloading application package dependencies..."
+    - yarn install
+    - echo "Building release version..."
+    - yarn build
+    - echo "Packing application for distribution..."
+    - echo "Set up the Environments"
+    - yarn generate:prd
+    - echo "Giving full permission to release folder..."
+    - chmod 777 dist
+    - echo "Copying ZEIT files to release folder..."
+    - cp now.json dist
+    - cd dist
+    - echo "Installing ZEIT dependencies..."
+    - yarn global add now@16.7.3
+    - echo "Starting ZEIT deployment..."
+    - now -e NODE_ENV=production --token=$ZEIT_TOKEN
+    - now --prod --token=$ZEIT_TOKEN
+    - echo "Deployment done"

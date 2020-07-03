@@ -1,0 +1,29 @@
+# dependencies
+node_modules
+package-lock.json
+yarn.lock
+
+# logs
+npm-debug.log
+yarn-error.log
+
+# other
+.nuxt
+dist
+.vscode
+.idea
+newrelic_agent.log
+.DS_STORE
+.eslintrc
+
+# docs
+/docs
+
+# @nuxtjs/pwa
+sw.*
+
+# dotenv environment variables file
+#.env
+#.env.production
+#.env.development
+#.env.staging

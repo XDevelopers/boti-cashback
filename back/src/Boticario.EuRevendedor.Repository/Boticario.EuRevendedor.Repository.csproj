@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\artifacts\Debug\</OutputPath>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\artifacts\Release\</OutputPath>
+  </PropertyGroup>
+  
+  <ItemGroup>
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Boticario.EuRevendedor.Core\Boticario.EuRevendedor.Core.csproj" />
+    <ProjectReference Include="..\Boticario.EuRevendedor.Data\Boticario.EuRevendedor.Data.csproj" />
+    <ProjectReference Include="..\Boticario.EuRevendedor.Interfaces\Boticario.EuRevendedor.Interfaces.csproj" />
+    <ProjectReference Include="..\Boticario.EuRevendedor.Models\Boticario.EuRevendedor.Models.csproj" />
+  </ItemGroup>
+
+</Project>
