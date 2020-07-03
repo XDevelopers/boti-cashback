@@ -36,7 +36,7 @@ namespace Boticario.EuRevendedor.Repository.MongoDb
         public async Task<ICollection<Order>> GetItemsAsync()
         {
             return await Context.GetItemsAsync(Builders<Order>.Filter.Empty, 
-                "Code", "Value", "Date", "AppliedCashback", "ValueCashback", "OrderStatus");
+                "Code", "Value", "Date", "Cpf", "AppliedCashback", "ValueCashback", "OrderStatus", "CreatedAt", "UpdatedAt");
         }
 
         public async Task<Order> InsertAsync(Order order)

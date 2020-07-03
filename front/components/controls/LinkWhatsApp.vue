@@ -42,7 +42,7 @@ export default {
           .replace(")", "")
           .replace("-", "")
           .replace(/\s/g, "");
-        let message = `Olá ${name}, nós somos da Correparti | CASH.`;
+        let message = `Olá ${name}, nós somos da Boticário | Eu Revendedor.`;
         return `https://wa.me/55${fixedNumber}?text=${encodeURI(message)}`;
       }
     }

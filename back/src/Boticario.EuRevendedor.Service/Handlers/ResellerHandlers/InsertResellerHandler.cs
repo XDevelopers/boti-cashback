@@ -34,6 +34,14 @@ namespace Boticario.EuRevendedor.Service.Handlers.ResellerHandlers
                 return response;
             }
 
+            //// TODO: Não foi SOLICITADO, EU Acredito que seria necessário (QUESTIONAR)
+            ////reseller = await repository.GetByCpf(request.Cpf);
+            ////if (reseller != null)
+            ////{
+            ////    response.AddNotification("Já existe um Revendedor com esse CPF!");
+            ////    return response;
+            ////}
+
             reseller = new User(request.Name, request.Cpf, request.Email, request.Password, request.Role);
 
             await repository.InsertAsync(reseller);

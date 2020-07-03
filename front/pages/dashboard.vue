@@ -4,7 +4,46 @@
     <alert v-if="msg" :message="msg" />
     <!-- end/ Área de Mensagens -->
 
-    <dashboard />
+    <div class="row">
+      <div class="col-xl-3 col-md-3">
+        <div class="card" :style="{ backgroundColor: '#546E7A' }">
+          <div class="card-body">
+            <div class="wigdet-two-content">
+              <p
+                class="m-0 text-white text-center text-uppercase"
+              >Cashback Acumulado até o momento!</p>
+              <h2 class="text-white text-center">
+                <span data-plugin="counterup">{{ totalCashback | formatPrice }}</span>
+                <i class="mdi mdi-arrow-up text-white font-30"></i>
+              </h2>
+              <p class="text-white text-center m-0">
+                <b>Wow!</b>
+                <br />Continue assim.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-3">
+        <div class="card" :style="{ backgroundColor: '#546E7A' }">
+          <div class="card-body">
+            <div class="wigdet-two-content">
+              <p class="m-0 text-white text-center text-uppercase">Escolha uma das opções no Menu!</p>
+              <h2 class="text-white text-center">
+                <span data-plugin="counterup"></span>
+                <i class="mdi mdi-alert-octagram-outline text-white font-30"></i>
+              </h2>
+              <p class="text-white text-center m-0">
+                <b>Aguarde!</b>
+                <br />Novas Funcionalidades estão chegando.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <loading :showLoading="showLoading" />
+    </div>
 
     <!-- end container-fluid -->
 
@@ -15,7 +54,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import Dashboard from "~/components/dashboard";
 
 export default {
   meta: {
@@ -24,35 +62,21 @@ export default {
 
   middleware: ["auth", "page-agent"],
 
-  components: {
-    Dashboard
-  },
+  components: {},
 
   data() {
     return {
       title: this.$store.state.title,
       // Msg -> Para exibir qualquer mensagem para o usuário!
       msg: "",
-      id: 0,
-      name: "",
-      createdAt: "",
-      updatedAt: "",
-      scheduleHistory: "",
-      lastUpdated: {
-        schedule: {
-          fileName: ""
-        }
-      },
       showLoading: false,
-      list: [],
-      tenants: []
+      totalCashback: ""
     };
   },
 
   computed: {
     ...mapGetters({
-      loggedInUser: "loggedInUser",
-      states: "generics/states"
+      currentUser: "getUser"
     })
   },
 
@@ -61,14 +85,33 @@ export default {
     title: this.$store.state.title;
   },
 
-  mounted() {
+  async mounted() {
     this.title = this.$store.state.title;
-    this.initialize();
+    await this.initialize();
   },
 
   methods: {
-    initialize() {
-      console.log("initialize");
+    async initialize() {
+      //console.log("initialize - Dashboard");
+      await this.getAccumulatedCashback();
+    },
+    async getAccumulatedCashback() {
+      this.showLoading = true;
+      try {
+        if (this.currentUser && this.currentUser.cpf) {
+          const response = await this.$cashbackServices.get(
+            `${this.currentUser.cpf}/acumulado`
+          );
+          if (response) {
+            //console.log("getAccumulatedCashback", response);
+            this.totalCashback = response;
+          }
+        }
+      } catch (error) {
+        console.log("getAccumulatedCashback", error);
+      } finally {
+        this.showLoading = false;
+      }
     }
   }
 };

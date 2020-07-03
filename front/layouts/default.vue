@@ -46,12 +46,6 @@
             data-toggle="dropdown"
           >
             <img src="../static/assets/images/user.jpg" alt="user-image" class="rounded-circle" />
-            <!-- <img
-              v-if="$auth.loggedIn"
-              v-img-base64="$auth.user.image"
-              alt="user-image"
-              class="rounded-circle"
-            />-->
           </a>
           <div
             class="dropdown-menu dropdown-menu-right profile-dropdown"
@@ -62,10 +56,10 @@
               <h6 class="text-overflow m-0">Meus Dados</h6>
             </div>
 
-            <a @click="showChangePassword" class="dropdown-item notify-item">
+            <!-- <a @click="showChangePassword" class="dropdown-item notify-item">
               <i class="fe-shield"></i>
               <span>Alterar Senha</span>
-            </a>
+            </a>-->
 
             <!-- item -->
             <nuxt-link
@@ -111,16 +105,15 @@
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/clientes">
+              <nuxt-link to="/orders">
                 <i class="fe-dollar-sign"></i>
                 <span>Compras</span>
               </nuxt-link>
             </li>
-
             <li>
-              <nuxt-link to="/usuarios">
-                <i class="fe-lock"></i>
-                <span>Usuários do Sistema</span>
+              <nuxt-link to="/resellers">
+                <i class="fe-users"></i>
+                <span>Revendedores</span>
               </nuxt-link>
             </li>
           </ul>
@@ -180,6 +173,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  name: "default",
   components: {},
 
   computed: {
@@ -225,6 +219,7 @@ export default {
       try {
         await this.$auth.logout();
         this.$axios.setToken(false);
+        this.$store.commit("clearUserData");
         this.$router.push("/");
         setTimeout(() => {
           this.$router.push("/");

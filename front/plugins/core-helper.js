@@ -187,7 +187,7 @@ let core = {
     // Formata a Data do Formato pt-BR dd/mm/yyyy para yyyy-mm-dd
     //
     parseDate(date) {
-        //console.log("core-parseDate", date);
+        //console.log("parseDate", date);
         if (!date) return null;
         if (date.length < 10) return null;
 
@@ -196,19 +196,16 @@ let core = {
     },
 
     parseISODate(date) {
-        // Dimas dia 04/05/2020 - Disse que ficar mais fácil lá assim:
-        //birthdate: "1937-08-29T00:00:00.000Z"
+        // Order date esta vindo: 2020-06-21T00:00:00-03:00
 
-        //console.log("parseDate", date);
-        let toString = Object.prototype.toString;
-
+        //console.log("parseISODate", date);
         if (!date) return null;
         if (date.length < 10) return null;
-        if (toString.call(date).split("T").length <= 0) return null;
 
-        const [year, month, day] = toString.call(date).split("T").split("-");
+        const [year, month, day] = date.split("T")[0].split("-");
+
         if (day && month && year) {
-            return `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+            return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
         }
         return null;
     },

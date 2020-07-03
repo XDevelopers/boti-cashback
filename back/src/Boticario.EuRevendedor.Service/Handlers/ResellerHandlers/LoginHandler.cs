@@ -64,7 +64,8 @@ namespace Boticario.EuRevendedor.Service.Handlers.ResellerHandlers
                 expires_in = jwt.ExpiresIn,
                 id = reseller.Id,
                 name = reseller.Name,
-                role = reseller.Role
+                role = reseller.Role,
+                cpf = reseller.Cpf
             });
         }
 

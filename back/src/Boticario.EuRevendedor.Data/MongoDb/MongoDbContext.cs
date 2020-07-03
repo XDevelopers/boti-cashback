@@ -67,14 +67,14 @@ namespace Boticario.EuRevendedor.Data.MongoDb
 
         public async Task<T> UpdateAsync<T>(string id, T entity)
         {
-            var _id = ObjectId.Parse(id);
-            return await GetCollection<T>().FindOneAndReplaceAsync(Builders<T>.Filter.Eq("_id", _id), entity);
+            //var _id = ObjectId.Parse(id);
+            return await GetCollection<T>().FindOneAndReplaceAsync(Builders<T>.Filter.Eq("_id", id), entity);
         }
 
         public async Task<DeleteResult> DeleteAsync<T>(string id)
         {
-            var _id = ObjectId.Parse(id);
-            return await GetCollection<T>().DeleteOneAsync(Builders<T>.Filter.Eq("_id", _id));
+            //var _id = ObjectId.Parse(id);
+            return await GetCollection<T>().DeleteOneAsync(Builders<T>.Filter.Eq("_id", id));
         }
 
         public async Task<T> DeleteAsync<T>(FilterDefinition<T> filter)
@@ -84,9 +84,9 @@ namespace Boticario.EuRevendedor.Data.MongoDb
 
         public async Task<T> GetByIdAsync<T>(string id)
         {
-            var _id = ObjectId.Parse(id);
+            //var _id = ObjectId.Parse(id);
             return await GetCollection<T>()
-                .Find(Builders<T>.Filter.Eq("_id", _id))
+                .Find(Builders<T>.Filter.Eq("_id", id))
                 .FirstOrDefaultAsync();
         }
 

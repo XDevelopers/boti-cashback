@@ -26,6 +26,25 @@ Vue.filter("formatDate", (val) => {
 });
 
 
+Vue.filter("formatPrice", (value) => {
+    let val = (value / 1).toFixed(2).replace('.', ',')
+    return `R$ ${val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+});
+
+Vue.filter("formatPercent", (value) => {
+    let val = `${value} %`; //.toLocaleString("pt-BR", { style: "percent" });
+    return val;
+});
+
+Vue.filter("formatCpf", (value) => {
+    // Retira os caracteres indesejados...
+    let cpf = value.replace(/[^\d]/g, "");
+
+    // Realizar a formatação...
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+});
+
+
 
 /*
  ** Formatará tudo para UPPERCASE

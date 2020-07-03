@@ -27,8 +27,8 @@ export default {
   methods: {
     getMailTo(email, name) {
       if (email && name) {
-        let message = `Olá ${name}, nós somos da Correparti | CASH.`;
-        let mailTo = `mailto:${email}?subject=Correparti | CASH&body=${message},`;
+        let message = `Olá ${name}, nós somos do Boticário | Eu Revendedor.`;
+        let mailTo = `mailto:${email}?subject=O Boticário | Eu Revendedor&body=${message},`;
         return mailTo;
       }
     }

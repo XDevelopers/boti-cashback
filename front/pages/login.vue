@@ -196,22 +196,43 @@ export default {
   methods: {
     initialize() {},
 
-    async login() {
+    login() {
       try {
         this.showLoading = true;
-        await this.$auth.loginWith("local", {
-          data: {
-            Email: this.email,
-            Password: this.password,
-            GrantType: "password"
-          }
-        });
-        await this.$auth.setUserToken(
-          localStorage.getItem("auth._token.local").replace("Bearer ", "")
-        );
+        this.$auth
+          .loginWith("local", {
+            data: {
+              Email: this.email,
+              Password: this.password,
+              GrantType: "password"
+            }
+          })
+          .then(response => {
+            if (response && response.data && response.data.id) {
+              this.$store.commit("setUser", {
+                id: response.data.id,
+                name: response.data.name,
+                role: response.data.role,
+                cpf: response.data.cpf
+              });
+              this.$auth.setUserToken(
+                localStorage.getItem("auth._token.local").replace("Bearer ", "")
+              );
+              this.$router.push("/dashboard");
+            } else {
+              console.log("ELSE: ??? ", response);
+            }
+            this.showLoading = false;
+          })
+          .catch(error => {
+            //console.log("Login Promise:", error.response);
+            this.displayErrors(error);
+            this.showLoading = false;
+          });
+
         //.then(() => this.$toast.success('User set!'));
         //this.$store.commit('tenant/setcpf', this.cpf);
-        this.$router.push("/dashboard");
+        //this.$router.push("/dashboard");
       } catch (error) {
         console.log(error);
         if (
@@ -224,6 +245,19 @@ export default {
         }
       } finally {
         this.showLoading = false;
+      }
+    },
+
+    displayErrors(error) {
+      if (
+        error &&
+        error.response &&
+        error.response.data &&
+        error.response.status &&
+        error.response.status === 400
+      ) {
+        let errorMessage = error.response.data[0].title;
+        this.$core.messageError(errorMessage);
       }
     },
 
