@@ -20,6 +20,10 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
     <SonarQubeExclude>True</SonarQubeExclude>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Content Include="D:\Projects\Others\2020\006\appsettings.Development.json" Link="appsettings.Development.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.2" />
